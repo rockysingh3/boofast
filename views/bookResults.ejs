@@ -1,0 +1,69 @@
+<% include ./particals/navbarLogout %>
+
+<div class="container bookResults">
+
+    <span class="line"></span>
+  
+    <!-- loop through the json object  -->
+    <% apiResultsdata['items'].forEach(function(items) { %>
+      <% let ID = items['id'] %>
+      <% let volumeInfo = items['volumeInfo'] %>
+      <% let publisher = volumeInfo['publisher'] %>
+      <% let pageCount = volumeInfo['pageCount'] %>
+      <% let author = volumeInfo['authors'] %>
+      <% let title = volumeInfo['title'] %>
+      <% let image = null %>
+      <% if(!(volumeInfo['imageLinks'] === undefined)) { %>
+        <% image = volumeInfo['imageLinks']['smallThumbnail'] %>
+      <% } %>
+      <% if(image !== null) { %>
+      <!-- bootstrap card  -->
+      <div class="card">
+              <div class="row no-gutters">
+                  <div class="col-auto">
+                      <img src="<%= image %>" class="img-fluid" alt="">
+                  </div>
+                  <div class="col">
+                      <div class="card-block px-2">
+                        <!-- the id elem is the unquie id of each book -->
+                        <a class="title" href="/books/<%=ID%>" ><%= title %></a>
+                        <!-- getting author, publisher, pageCount of books -->
+                        <p class="card-text">by: <%= author %></br>
+                        publisher: <%= publisher %></br>
+                        page count: <%= pageCount %></p>
+                        <div class="btn_class">
+                          <a href="#" class="btn btn-info btn-sm">Review</a>
+                          <a href="#" class="btn btn-info btn-sm">Rate</a>
+                          <a href="#" class="btn btn-info btn-sm">Add to bookself</a>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="card-footer w-100 text-muted">
+              </div>
+          </div>
+          <% } %>
+      <% }) %>
+  
+  </div>
+  
+  
+  <!-- sends the unique id book the book back to the server -->
+  <!-- <script type="text/javascript">
+      $(document).ready(function(){
+          $(".title").click(function() {
+            var id = $(this).attr("id");
+            $.ajax({
+              type: 'POST',
+              contentType: "application/json; charset=UTF-8",
+              data: JSON.stringify({ID:id}),
+              url: 'http://localhost:3000/bookDetails',
+              success: function(data){
+                console.log('success');
+              }
+            });
+          });
+      });
+  </script> -->
+  
+  <% include ./particals/body %>
