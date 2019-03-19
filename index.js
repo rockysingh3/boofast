@@ -16,10 +16,11 @@ const db = require('./config/keys').MongoURI;
 
 // Connect to Mongo
 mongoose.connect(db, { useNewUrlParser: true })
+    .then(() => console.log('I made it'))
     .then(() => console.log('MongoDB Connected...'))
     .catch(err => console.log(err));
 
-// setting up ejs
+    // setting up ejs
 app.use(expressLayouts);
 app.set('view engine', 'ejs');
 
@@ -56,6 +57,7 @@ app.use((req, res, next) => {
 // rendering all the Routes
 app.use('/', require('./routes/index'));
 app.use('/user', require('./routes/user'));
+app.use('/book', require('./routes/books'));
 
 const PORT = process.env.PORT || 3000;
 
