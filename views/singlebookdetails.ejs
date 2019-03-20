@@ -1,0 +1,39 @@
+<% include ./particals/navbarLogout %>
+
+
+  <!-- bootstrap card  -->
+  <div class="container">
+
+  <div class="card">
+          <div class="row no-gutters">
+              <div class="col-auto">
+                  <img src="<%= bookdata['volumeInfo']['imageLinks']['thumbnail']%>" class="img-fluid" alt="">
+              </div>
+              <div class="col">
+                  <div class="card-block px-2">
+
+                    <!-- the id elem is the unquie id of each book -->
+
+                    <a class="title" ><%= bookdata['volumeInfo']['title']  %></a>
+
+                    <!-- getting author, publisher, pageCount of books -->
+                    <p class="card-text">by: <%= bookdata['volumeInfo']['authors']  %></br>
+                    publisher: <%= bookdata['volumeInfo']['publisher']  %></br>
+                    <span class="line"></span>
+                    <%= bookdata['volumeInfo']['description'] %></p>
+                    <div class="btn_class">
+                      <a href="/summaries" class="btn btn-info btn-sm">Review</a>
+                      <a href="#" class="btn btn-info btn-sm">Rate</a>
+                      <a href="#" class="btn btn-info btn-sm">Add to bookself</a>
+                    </div>
+                  </div>
+              </div>
+          </div>
+          <div class="card-footer w-100 text-muted">
+          </div>
+      </div>
+
+        </div>
+
+
+<% include ./particals/body %>
