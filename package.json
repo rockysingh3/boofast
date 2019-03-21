@@ -5,18 +5,25 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "lint:ejs": "ejslint ./views/bookResults.ejs"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
     "connect-flash": "^0.1.1",
     "ejs": "^2.6.1",
+    "ejs-lint": "^0.3.0",
+    "es6-promise": "^4.2.6",
     "express": "^4.16.4",
     "express-ejs-layouts": "^2.5.0",
     "express-session": "^1.15.6",
+    "fatch": "^1.2.0",
+    "fetch": "^1.1.0",
+    "isomorphic-fetch": "^2.2.1",
     "mongoose": "^5.4.19",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",

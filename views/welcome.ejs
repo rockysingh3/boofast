@@ -1,5 +1,9 @@
-<% include ./particals/navbar %>
 
+<% if(isAuthenticated) { %>
+  <% include ./particals/navbarLogout %>
+<% } else { %>
+  <% include ./particals/navbar %>
+<% } %>
 
 <div style="margin-top: 1%;" class="container">
   <form class="searchForBook" action="/book/bookResults" method="POST">

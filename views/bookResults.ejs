@@ -5,12 +5,13 @@
     <span class="line"></span>
   
     <!-- loop through the json object  -->
-    <% apiResultsdata['items'].forEach(function(items) { %>
+    <% books['items'].forEach(function(items) { %>
       <% let ID = items['id'] %>
       <% let volumeInfo = items['volumeInfo'] %>
       <% let publisher = volumeInfo['publisher'] %>
       <% let pageCount = volumeInfo['pageCount'] %>
       <% let author = volumeInfo['authors'] %>
+      <% console.log(volumeInfo['title']) %>
       <% let title = volumeInfo['title'] %>
       <% let image = null %>
       <% if(!(volumeInfo['imageLinks'] === undefined)) { %>
@@ -26,7 +27,7 @@
                   <div class="col">
                       <div class="card-block px-2">
                         <!-- the id elem is the unquie id of each book -->
-                        <a class="title" href="/books/<%=ID%>" ><%= title %></a>
+                        <a class="title" href="/book/bookdetails/<%=ID%>" ><%= title %></a>
                         <!-- getting author, publisher, pageCount of books -->
                         <p class="card-text">by: <%= author %></br>
                         publisher: <%= publisher %></br>
