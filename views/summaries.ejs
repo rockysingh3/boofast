@@ -1,19 +1,52 @@
 <% if(isAuth) { %>
-    <% include ./particals/navbarLogout %>
-  <% } else { %>
-    <% include ./particals/navbar %>
-  <% } %>
+<% include ./particals/navbarLogout %>
+<% } else { %>
+<% include ./particals/navbar %>
+<% } %>
 
-    <textarea name="content" id="editor">This is some sample content.</textarea>
-                <script>
-                        ClassicEditor
-                                .create( document.querySelector( '#editor' ) )
-                                .then( editor => {
-                                        console.log( editor );
-                                } )
-                                .catch( error => {
-                                        console.error( error );
-                                } );
-                </script>
+<h1 id="testInput">click me</h1>
+
+<script>
+    document.querySelector('#testInput').addEventListener('click', () => {
+        console.log("changed data");
+    })
+</script>
+
+<textarea name="content" id="editor">This is some sample content.</textarea>
+<button id="submit">Submit</button>
+<script>
+    let doc = document.querySelector('#editor');
+    let editor = null;
+    ClassicEditor.doc
+    ClassicEditor
+        .create(doc)
+        .then(e => {
+            editor = e;
+            console.log(editor);
+        })
+
+        .catch(error => {
+            console.error(error);
+        });
+
+
+    document.querySelector('#submit').addEventListener('click', () => {
+        const editorData = editor.getData();
+        console.log(editorData);
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", '/book/summary', true);
+
+        //Send the proper header information along with the request
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+        xhr.send(editorData);
+    });
+</script>
+
+<style>
+    .ck-editor__editable {
+        min-height: 400px;
+    }
+</style>
 
 <% include ./particals/body %>

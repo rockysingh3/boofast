@@ -1,3 +1,9 @@
+<% if(isAuth) { %>
+  <% include ./particals/navbarLogout %>
+<% } else { %>
+  <% include ./particals/navbar %>
+<% } %>
+
 <div class="row mt-5">
     <div class="col-md-6 m-auto">
       <div class="card card-body">
