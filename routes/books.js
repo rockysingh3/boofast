@@ -51,5 +51,10 @@ router.get('/bookdetails/:id', (req, res) => {
       res.render('summaries', { isAuth:isAuth });
   });
 
+  router.post('/summary', (req, res) => {
+      console.log(req.body);
+      res.status(200).json({hello:'world'});
+  });
+
 
 module.exports = router;
