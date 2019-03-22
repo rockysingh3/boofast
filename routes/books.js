@@ -51,8 +51,17 @@ router.get('/bookdetails/:id', (req, res) => {
       res.render('summaries', { isAuth:isAuth });
   });
 
+  router.post('/summary/image', (req, res) => {
+        res.send({
+            "uploaded": true,
+            "url": "https://upload.wikimedia.org/wikipedia/commons/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg"
+        });
+  });
+
+
   router.post('/summary', (req, res) => {
-      console.log(req.body);
+      let inputText = req.body;
+
       res.status(200).json({hello:'world'});
   });
 

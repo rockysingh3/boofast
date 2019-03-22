@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@ckeditor/ckeditor5-adapter-ckfinder": "^11.0.0",
     "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
     "connect-flash": "^0.1.1",
