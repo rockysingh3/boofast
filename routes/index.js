@@ -13,8 +13,7 @@ router.get('/', (req,res) => {
 router.get('/dashboard', ensureAutheticated, (req, res) => {
     res.render('dashboard');
 
-
-    req.body.ed
+    //req.body.ed
 });
 
 

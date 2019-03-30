@@ -6,17 +6,12 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    summary: {
+        type: [{ type: mongoose.Schema.Types.Mixed, ref: 'summary' }]
+    },
     phoneNumber: {
         type: String,
-        required: true
-    },
-    age: {
-        type: Number,
-        required: true
-    },
-    Ddob: { 
-        type: Date, 
-        default: new Date()
+        required: false
     },
     email: {
         type: String,

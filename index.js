@@ -24,9 +24,8 @@ mongoose.connect(db, { useNewUrlParser: true })
 app.use(expressLayouts);
 app.set('view engine', 'ejs');
 
-
 // BodyParser
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 
 // Express Session
 app.use(session({

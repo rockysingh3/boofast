@@ -5,13 +5,12 @@
     <span class="line"></span>
   
     <!-- loop through the json object  -->
-    <% books['items'].forEach(function(items) { %>
-      <% let ID = items['id'] %>
-      <% let volumeInfo = items['volumeInfo'] %>
+    <% books['items'].forEach(function(item) { %>
+      <% let ID = item['id'] %>
+      <% let volumeInfo = item['volumeInfo'] %>
       <% let publisher = volumeInfo['publisher'] %>
       <% let pageCount = volumeInfo['pageCount'] %>
       <% let author = volumeInfo['authors'] %>
-      <% console.log(volumeInfo['title']) %>
       <% let title = volumeInfo['title'] %>
       <% let image = null %>
       <% if(!(volumeInfo['imageLinks'] === undefined)) { %>
