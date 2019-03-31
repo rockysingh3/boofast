@@ -6,7 +6,7 @@ const SummarySchema = new mongoose.Schema({
         type: String
     },
     bookID: {
-        type: number, 
+        type: String
     }
 });
 
