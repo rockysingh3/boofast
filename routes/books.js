@@ -1,12 +1,12 @@
 const express = require('express');
 const request = require('request');
 const router = express.Router();
-const axios = require('axios');
 const { ensureAutheticated } = require('../config/auth');
 const fs = require('fs');
 const url = require('url');
 const User = require('../models/user');
 const Summary = require('../models/summary');
+const fetch = require('node-fetch');
 // router.get('/bookResults', (req, res) => {
 //     res.render('bookResults');
 // });
@@ -24,14 +24,24 @@ router.post('/bookResults', ensureAutheticated, (req, res) => {
     const URL = 'https://www.googleapis.com/books/v1/volumes?q=' + searchText + '&maxResults=40&orderBy=relevance';
 
 
-    request(URL, (err, response, body) => {
-        if (!err && response.statusCode == 200) {
-            let bookdata = JSON.parse(body);
-            res.render('bookResults', { books: bookdata });
-        } else {
-            console.log(err);
-        }
-    });
+    // request(URL, (err, response, body) => {
+    //     if (!err && response.statusCode == 200) {
+    //         let bookdata = JSON.parse(body);
+    //         res.render('bookResults', { books: bookdata });
+    //     } else {
+    //         console.log(err);
+    //     }
+    // });
+    // convert the [object] at title to JSON
+    fetch(URL)
+            .then((res) => {
+                return res.json();
+            })
+            .then(data => {
+                console.log(data);
+                res.render('bookResults', { books: data });
+            })
+            .catch(err => console.log(err));
 });
 
 
@@ -39,44 +49,32 @@ router.post('/bookResults', ensureAutheticated, (req, res) => {
 // reders a single books user clicked on
 router.get('/bookdetails/:id', (req, res) => {
     //console.log(`req is : ${req.body.ID}`);
-    let id = req.params.id;
+    //let id = req.params.id;
     currentBookID = req.params.id;
     //making a call to google books api with a ID of one book 
-    const URL = 'https://www.googleapis.com/books/v1/volumes/' + id;
-    request(URL, (err, response, body) => {
-        if (!err && response.statusCode == 200) {
-            let bookdata = JSON.parse(body);
-            res.render('singlebookdetails', { bookdata: bookdata });
-        } else {
-            console.log(err);
-        }
-    })
+    const URL = 'https://www.googleapis.com/books/v1/volumes/' + currentBookID;
 
 
-
-
-    // fetch all the summary's of this book 
-    let allSummaries;
-    User.find({})
-            .populate('summary.bookID')
-            .exec(function(error, posts) {
-               allSummaries = JSON.parse(posts);
-               allSummaries.forEach((summary) => {
-                    console.log(summary)
-               })
-                if(!error) return JSON.stringify(posts, null, "\t");
+        fetch(URL)
+            .then((res) => {
+                return res.json();
             })
+            .then(data => {
+                console.log(data);
+                res.render('singlebookdetails', { bookdata: data });
+            })
+            .catch(err => console.log(err));
 
+    // request(URL, (err, response, body) => {
+    //     if (!err && response.statusCode == 200) {
+    //         let bookdata = JSON.parse(body);
+    //         //console.log(bookdata)
+    //         res.render('singlebookdetails', { bookdata: bookdata });
+    //     } else {
+    //         //console.log(`error ${err}`);
+    //     }
+    // })
 
-    //let allSummaries = User.find({"summary": { "$elemMatch": { "bookID": id } }});
-   //console.log(allSummaries)
-
-//    allSummaries.forEach(() => {
-
-//    })
-    // User.find({ summary: 'Joe' })
-    //         .then((users) => console.log(users))
-    //         .then(() => done()) .find( { "instock": { warehouse: "A", qty: 5 } } )
 });
 
 
@@ -95,9 +93,9 @@ router.post('/summary', (req, res) => {
     let currentUser = req.user;
 
 
-    
+
     JSON.parse(data, (key) => {
-    
+
         let sum = new Summary({ summary: key, bookID: currentBookID });
         currentUser.summary.push(sum);
     });

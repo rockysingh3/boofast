@@ -27,6 +27,7 @@
     "fs": "0.0.1-security",
     "isomorphic-fetch": "^2.2.1",
     "mongoose": "^5.4.19",
+    "node-fetch": "^2.3.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "request": "^2.88.0",

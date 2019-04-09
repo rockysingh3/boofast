@@ -1,6 +1,6 @@
 <% include ./particals/navbarLogout %>
 
-<div class="container bookResults">
+<div style="margin-top: 10%;" class="container bookResults">
 
     <span class="line"></span>
   
@@ -16,7 +16,7 @@
       <% if(!(volumeInfo['imageLinks'] === undefined)) { %>
         <% image = volumeInfo['imageLinks']['smallThumbnail'] %>
       <% } %>
-      <% if(image !== null) { %>
+      <% if(image !== null && title !== 'Undefined') { %>
       <!-- bootstrap card  -->
       <div class="card">
               <div class="row no-gutters">

@@ -20,6 +20,9 @@ mongoose.connect(db, { useNewUrlParser: true })
     .then(() => console.log('MongoDB Connected...'))
     .catch(err => console.log(err));
 
+
+
+app.use(express.static(__dirname + '/public'));
     // setting up ejs
 app.use(expressLayouts);
 app.set('view engine', 'ejs');
