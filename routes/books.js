@@ -55,17 +55,17 @@ router.get('/bookdetails/:id', (req, res) => {
 
 
 
-    // fetch all the summary's of this book 
-    let allSummaries;
-    User.find({})
-            .populate('summary.bookID')
-            .exec(function(error, posts) {
-               allSummaries = JSON.parse(posts);
-               allSummaries.forEach((summary) => {
-                    console.log(summary)
-               })
-                if(!error) return JSON.stringify(posts, null, "\t");
-            })
+    // // fetch all the summary's of this book 
+    // let allSummaries;
+    // User.find({})
+    //         .populate('summary.bookID')
+    //         .exec(function(error, posts) {
+    //           allSummaries = JSON.parse(posts);
+    //           allSummaries.forEach((summary) => {
+    //                 console.log(summary)
+    //           })
+    //             if(!error) return JSON.stringify(posts, null, "\t");
+    //         })
 
 
     //let allSummaries = User.find({"summary": { "$elemMatch": { "bookID": id } }});
