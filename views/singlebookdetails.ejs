@@ -14,10 +14,10 @@
 
                     <!-- the id elem is the unquie id of each book -->
 
-                    <a class="title" ><%= bookdata['volumeInfo']['title']  %></a>
+                    <a class="title" ><% bookdata['volumeInfo']['title']  %></a>
 
                     <!-- getting author, publisher, pageCount of books -->
-                    <p class="card-text">by: <%= bookdata['volumeInfo']['authors']  %></br>
+                    <p class="card-text">by: <% bookdata['volumeInfo']['authors']  %></br>
                     publisher: <%= bookdata['volumeInfo']['publisher']  %></br>
                     <span class="line"></span>
                     <%= bookdata['volumeInfo']['description'] %></p>

@@ -12,11 +12,16 @@ const fetch = require('node-fetch');
 // });
 
 
-// global var to store the _id of a single book user clicks on
+
+/* Global var to store the _id of a single book user clicks on
+   This var is shared amonge routes as the user navigates the site 
+*/
 let currentBookID;
 
 
-// renders a list of books user searched for
+/*  This route renders a list of books user searched for
+    Once the data is fetched its rendered to bookResults.ejs as an object    
+*/
 router.post('/bookResults', ensureAutheticated, (req, res) => {
 
 

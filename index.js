@@ -5,7 +5,7 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
 
-// initiain express
+// init express
 const app = express();
 
 
@@ -27,8 +27,9 @@ app.use(express.static(__dirname + '/public'));
 app.use(expressLayouts);
 app.set('view engine', 'ejs');
 
-// BodyParser
+// Using bodyParser
 app.use(express.urlencoded({ extended: true }));
+
 
 // Express Session
 app.use(session({
@@ -44,7 +45,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-// connect flsh
+// connecting flsh
 app.use(flash());
 
 // Global Vars
@@ -65,6 +66,7 @@ app.use('/user', require('./routes/user'));
 app.use('/book', require('./routes/books'));
 //app.use('/book', require('./routes/singlebookdetails'));
 
+// server will run on port 3000
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, console.log(`Server started on port ${PORT}`));
