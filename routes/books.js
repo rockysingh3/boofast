@@ -7,16 +7,18 @@ const fs = require('fs');
 const url = require('url');
 const User = require('../models/user');
 const Summary = require('../models/summary');
-// router.get('/bookResults', (req, res) => {
-//     res.render('bookResults');
-// });
 
 
-// global var to store the _id of a single book user clicks on
+
+/* Global var to store the _id of a single book user clicks on
+   This var is shared amonge routes as the user navigates the site 
+*/
 let currentBookID;
 
 
-// renders a list of books user searched for
+/*  This route renders a list of books user searched for
+    Once the data is fetched its rendered to bookResults.ejs as an object    
+*/
 router.post('/bookResults', ensureAutheticated, (req, res) => {
 
 
@@ -29,7 +31,7 @@ router.post('/bookResults', ensureAutheticated, (req, res) => {
             let bookdata = JSON.parse(body);
             res.render('bookResults', { books: bookdata });
         } else {
-            console.log(err);
+            console.log(`bookResults route err: ${err}`);
         }
     });
 });
@@ -38,45 +40,21 @@ router.post('/bookResults', ensureAutheticated, (req, res) => {
 
 // reders a single books user clicked on
 router.get('/bookdetails/:id', (req, res) => {
-    //console.log(`req is : ${req.body.ID}`);
-    let id = req.params.id;
+
+    //let id = req.params.id;
     currentBookID = req.params.id;
     //making a call to google books api with a ID of one book 
-    const URL = 'https://www.googleapis.com/books/v1/volumes/' + id;
+    const URL = 'https://www.googleapis.com/books/v1/volumes/' + currentBookID;
     request(URL, (err, response, body) => {
-        if (!err && response.statusCode == 200) {
+        if (!err && response.statusCode === 200) {
             let bookdata = JSON.parse(body);
             res.render('singlebookdetails', { bookdata: bookdata });
         } else {
-            console.log(err);
+            //console.log(`bookdetails route err: ${err}`);
+            console.log('whats good')
         }
     })
 
-
-
-
-    // // fetch all the summary's of this book 
-    // let allSummaries;
-    // User.find({})
-    //         .populate('summary.bookID')
-    //         .exec(function(error, posts) {
-    //           allSummaries = JSON.parse(posts);
-    //           allSummaries.forEach((summary) => {
-    //                 console.log(summary)
-    //           })
-    //             if(!error) return JSON.stringify(posts, null, "\t");
-    //         })
-
-
-    //let allSummaries = User.find({"summary": { "$elemMatch": { "bookID": id } }});
-   //console.log(allSummaries)
-
-//    allSummaries.forEach(() => {
-
-//    })
-    // User.find({ summary: 'Joe' })
-    //         .then((users) => console.log(users))
-    //         .then(() => done()) .find( { "instock": { warehouse: "A", qty: 5 } } )
 });
 
 
